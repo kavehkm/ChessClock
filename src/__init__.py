@@ -88,8 +88,8 @@ class Controller(object):
         self._clock.connect(self._tik)
         # create players
         self._players = {
-            self.WHITE: Player(**st.WHITE),
-            self.BLACK: Player(**st.BLACK)
+            self.WHITE: Player(**st.get('white')),
+            self.BLACK: Player(**st.get('black'))
         }
         # set turn to default
         self._turn = self.DEFAULT_TURN
@@ -168,8 +168,10 @@ class App(tk.Tk):
         self.bind('<Key>', self.warkey)
 
     def _initialize(self):
-        self.set_clocks(st.WHITE['time'], st.BLACK['time'])
-        self.set_names(st.WHITE['name'], st.BLACK['name'])
+        white = st.get('white')
+        black = st.get('black')
+        self.set_clocks(white['time'], black['time'])
+        self.set_names(white['name'], black['name'])
 
     @staticmethod
     def clock_format(t):
